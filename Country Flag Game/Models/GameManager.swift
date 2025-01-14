@@ -17,22 +17,25 @@ class GameManager: ObservableObject {
     @Published private(set) var answerChoices = [Answer]()
     @Published private(set) var progress: CGFloat = 0.0
     @Published private(set) var score = 0
+    
     init() {
         reset()
     }
     
-    func reset(){
+    func reset() {
+        loadQuestions()
         questions = questions.shuffled()
         index = 0
         score = 0
         progress = 0.0
         playingGame = true
+        goToNextQuestion()
     }
     
-    func loadQuestions(){
+    func loadQuestions() {
         let countries = Data().countries
         if countries.count < 4 {
-            print("There are only \(countries.count) listed in Data (must be at least 4")
+            print("There are only \(countries.count) countries listed in Data (must be at least 4).")
         }
         else {
             questions.removeAll()
@@ -46,11 +49,11 @@ class GameManager: ObservableObject {
                             }
                         }
                     }
-                    questions.append(Question(correctAnswer: Answer(text: country, isCorrect: true),
+                    questions.append(Question(correctAnswer: Answer(text:country, isCorrect: true),
                                               incorrectAnswers: [
-                                                Answer(text:incorrectAnswer[0], isCorrect: false),
-                                                Answer(text:incorrectAnswer[1], isCorrect: false),
-                                                Answer(text:incorrectAnswer[2], isCorrect: false)
+                                                Answer(text: incorrectAnswer[0], isCorrect: false),
+                                                Answer(text: incorrectAnswer[1], isCorrect: false),
+                                                Answer(text: incorrectAnswer[2], isCorrect: false)
                                               ]))
                 }
                 else {
@@ -60,7 +63,7 @@ class GameManager: ObservableObject {
         }
     }
     
-    func goToNextQuestion(){
+    func goToNextQuestion() {
         if index < questions.count {
             answerSelected = false
             progress = CGFloat(index) / CGFloat(questions.count) * 350.0
@@ -80,6 +83,4 @@ class GameManager: ObservableObject {
             score += 1
         }
     }
-    
-    
 }

@@ -10,19 +10,20 @@ import SwiftUI
 struct QuestionView: View {
     @EnvironmentObject var gameManager: GameManager
     var body: some View {
-        VStack(spacing: 20, content: {
+        VStack(spacing: 20) {
             if gameManager.playingGame {
-                HStack(content: {
+                HStack {
                     Text("Country Flag Game")
-                        .foregroundColor(.yellow)
+                        .padding()
                         .fontWeight(.heavy)
                     Spacer()
                     Text("\(gameManager.index) out of \(gameManager.questions.count)")
                         .foregroundColor(.yellow)
-                })
+                }
             ProgressBar(progress: gameManager.progress)
-            VStack(spacing: 10, content: {
+            VStack(spacing: 10) {
                 Text("Which country's flag is this")
+                    .font(.title)
                 Image(gameManager.country)
                     .resizable()
                     .frame(width: 300, height: 200)
@@ -30,7 +31,7 @@ struct QuestionView: View {
                     AnswerRow(answer: answer)
                         .environmentObject(gameManager)
                 }
-            })
+            }
             Button {
                 gameManager.goToNextQuestion()
             } label: {
@@ -40,7 +41,7 @@ struct QuestionView: View {
             Spacer()
         }
             else {
-                Text("Country FLag Game")
+                Text("Country Flag Game")
                     .font(.title)
                     .fontWeight(.heavy)
                 Text("Congratulations! You've completed the game!")
@@ -51,9 +52,11 @@ struct QuestionView: View {
                     CustomButton(text: "Play Again")
                 }
             }
-        })
-        .padding()
+        }
+        .foregroundColor(.yellow)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.cyan)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
