@@ -10,15 +10,25 @@ struct Data {
 
     let countries = [
 
+        "Algeria",
+        
         "Angola",
 
         "Austria",
 
         "China",
+        
+        "Cyprus",
+        
+        "El Salvador",
 
         "England",
 
         "Estonia",
+        
+        "Fiji",
+        
+        "Finland",
 
         "France",
 
