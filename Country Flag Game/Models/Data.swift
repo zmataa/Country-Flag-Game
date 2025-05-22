@@ -58,7 +58,13 @@ struct Data {
 
         "Ukraine",
 
-        "United States"
+        "United States",
+        
+        "Brazil",
+        
+        "Canada",
+        
+        "Japan"
 
     ]
 
